@@ -35,7 +35,6 @@ function Main({ children }) {
         cursor: 'e-resize',
         backgroundColor: '#555',
         userSelect: 'none',
-        margin: 2
     };
 
     // Start resizing
