@@ -1,0 +1,44 @@
+.flex-gap8-col {
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flex-gap8 {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    align-self: stretch;
+}
+
+.flex-gap16-col {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flex-gap16 {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    align-self: stretch;
+}
+
+.p-16 {
+    padding: 16px;
+}
+.p-8 {
+    padding: 8px;
+}
+.p-4 {
+    padding: 4px;
+}
+
+.p-4-8 {
+    padding: 4px 8px;
+}
+.p-16-12 {
+    padding: 16px 12px;
+}
