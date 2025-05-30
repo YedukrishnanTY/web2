@@ -38,6 +38,7 @@ export default function SplitText() {
         },
         heading: {
             willChange: "transform, opacity",
+            fontSize: '32px'
         },
     }
 
@@ -84,12 +85,6 @@ export default function SplitText() {
             <h1 style={styles.heading}>
                 Hi I'm YeduKrishnanTY
             </h1>
-            <AnimatedTestimonials testimonials={testimonials} />
-            <AnimatedTestimonials testimonials={testimonials} />
-            <AnimatedTestimonials testimonials={testimonials} />
-            <AnimatedTestimonials testimonials={testimonials} />
-            <AnimatedTestimonials testimonials={testimonials} />
-            <AnimatedTestimonials testimonials={testimonials} />
             <AnimatedTestimonials testimonials={testimonials} />
         </div>
     )
