@@ -5,6 +5,8 @@ import {
 } from "motion/react"
 import { StyleSheet } from './style'
 import Aurora from './Aurora'
+import { ShootingStars } from './star/star'
+import { StarsBackground } from './star/bg'
 
 export default function Main({ children }) {
     const { scrollYProgress } = useScroll()
@@ -28,6 +30,8 @@ export default function Main({ children }) {
             </div>
             <motion.div className="progress" style={{ scaleX }} />
             <StyleSheet />
+            <ShootingStars />
+            <StarsBackground />
         </div>
     )
 }
