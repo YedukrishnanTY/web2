@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=WDXL+Lubrifont+TC&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
   margin: 0;
@@ -7,6 +10,6 @@ body {
   font-family: 'Inconsolata' !important;
   font-weight: 400;
   font-style: normal;
+  background: #000000;
+  color: aliceblue;
 }
-
- 

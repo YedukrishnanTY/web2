@@ -1,16 +1,9 @@
 import {
     motion,
-    MotionValue,
     useScroll,
     useSpring,
-    useTransform,
 } from "motion/react"
-import { useRef } from "react"
 import { StyleSheet } from './style'
-function useParallax(value, distance) {
-    return useTransform(value, [0, 1], [-distance, distance])
-}
-
 
 export default function Main({ children }) {
     const { scrollYProgress } = useScroll()
