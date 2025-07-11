@@ -15,9 +15,9 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 
 const corsOptions = {
-  origin: process.env.CLIENT_URL,
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
 };
 
 app.use(cors(corsOptions));
@@ -25,11 +25,9 @@ app.use(cors(corsOptions));
 app.use("/details", details);
 app.use("/coffee", coffee);
 
-if (process.env.NODE_ENV !== "production") {
-  const port = process.env.PORT || 3001;
-  app.listen(port, () => {
+const port = process.env.PORT || 3001;
+app.listen(port, () => {
     console.log(`🚀 Server running on http://localhost:${port}`);
-  });
-}
+});
 
 exports.handler = serverlessExpress({ app });
