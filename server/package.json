@@ -10,7 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
-    "nodemon": "^3.1.10"
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "http": "^0.0.1-security",
+    "mongodb": "^6.17.0",
+    "mongoose": "^8.16.3",
+    "morgan": "^1.10.0"
   }
 }

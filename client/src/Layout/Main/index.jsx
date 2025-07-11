@@ -5,8 +5,9 @@ import {
 } from "motion/react"
 import { StyleSheet } from './style'
 import Aurora from './Aurora'
-import { ShootingStars } from './star/star'
-import { StarsBackground } from './star/bg'
+// import { ShootingStars } from './star/star'
+// import { StarsBackground } from './star/bg'
+// TODO : need to check the possibility of using the shooting stars and stars background with bootstrap div. 
 
 export default function Main({ children }) {
     const { scrollYProgress } = useScroll()
@@ -15,7 +16,6 @@ export default function Main({ children }) {
         damping: 30,
         restDelta: 0.001,
     })
-
     return (
         <div id="example">
             <Aurora
@@ -30,8 +30,8 @@ export default function Main({ children }) {
             </div>
             <motion.div className="progress" style={{ scaleX }} />
             <StyleSheet />
-            <ShootingStars />
-            <StarsBackground />
+            {/* <ShootingStars />
+            <StarsBackground /> */}
         </div>
     )
 }
