@@ -13,6 +13,7 @@ export const styles = {
     },
     heading: {
         fontSize: "32px",
+        zIndex: 1,
     },
     left1: {
         position: "absolute",
