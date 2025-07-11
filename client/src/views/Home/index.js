@@ -4,6 +4,8 @@ import { splitText } from "motion-plus"
 import { AnimatedTestimonials } from "./Components/AnimatedTestimonials";
 import { fetchDetails } from '../../services/data.services'
 import Spotify from './Components/Spotify.js';
+import { styles } from './style.js';
+import ContactForm from './Components/ContactForm/index.js';
 
 export default function SplitText() {
     const containerRef = React.useRef(null);
@@ -30,23 +32,6 @@ export default function SplitText() {
         })
     }, [])
 
-    const styles = {
-        container: {
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%",
-            textAlign: "center",
-            flexDirection: 'column',
-            gap:'32px',
-            paddingBottom: '80px',
-        },
-        heading: {
-            willChange: "transform, opacity",
-            fontSize: '32px'
-        },
-    }
-
     React.useEffect(() => {
         fetchDetails()
             .then((data) => {
@@ -71,12 +56,16 @@ export default function SplitText() {
     }, []);
 
     return (
-        <div ref={containerRef} style={styles.container}>
-            <h1 style={styles.heading}>
-                Hi I'm YeduKrishnanTY
-            </h1>
-            <AnimatedTestimonials testimonials={testimonials} />
-            <Spotify src={"https://open.spotify.com/embed/playlist/5ldCF4ft5tuJfxO29MVelD?utm_source=generator&theme=0"} />
+        <div style={styles.wrapper} ref={containerRef}>
+            <img src={require('../../assets/5.JPEG')} alt="Right 1" style={styles.right1} />
+            <img src={require('../../assets/3.JPEG')} alt="Left 2" style={styles.left3} />
+            <img src={require('../../assets/4.JPEG')} alt="Left 2" style={styles.right3} />
+
+            {/* Main content */}
+            <h1 style={styles.heading}>Hi I'm YeduKrishnanTY</h1>
+            <AnimatedTestimonials testimonials={testimonials || []} />
+            <Spotify src="https://open.spotify.com/embed/playlist/5ldCF4ft5tuJfxO29MVelD?utm_source=generator&theme=0" />
+            <ContactForm />
         </div>
-    )
+    );
 }

@@ -1,0 +1,342 @@
+.contactSection {
+    padding: 80px 0;
+    /* Adjust padding as needed */
+    /* Ensure dark background for the section */
+    color: #e0e0e0;
+    position: relative;
+    /* For the illustration positioning */
+    overflow: hidden;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+    /* Horizontal padding for responsiveness */
+}
+
+.sectionTitle {
+    font-size: 3em;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #f0f0f0;
+    letter-spacing: -0.02em;
+}
+
+.sectionSubtitle {
+    font-size: 1.2em;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #a0a0a0;
+}
+
+/* Contact Form Styling */
+.contactForm {
+    background-color: #2c2c2c;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.5),
+        /* Larger, darker shadow for depth */
+        0 0 0 1px rgba(0, 255, 192, 0.1);
+    /* Very subtle thin border/glow for definition */
+    margin-bottom: 40px;
+    position: relative;
+    /* For potential animations */
+    overflow: hidden;
+    /* To contain any inner animations */
+    z-index: 1;
+    /* Ensure form is above illustration */
+    /* Optional: Add a subtle transform for a slight lift */
+    transform: perspective(1000px) rotateX(0deg);
+    /* Initial state for potential hover effect */
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    /* Smooth transition */
+}
+
+.contactForm:hover {
+    transform: perspective(1000px) rotateX(1deg) translateY(-5px);
+    /* Subtle tilt and lift on hover */
+    box-shadow:
+        0 15px 50px rgba(0, 0, 0, 0.6),
+        /* Even deeper shadow on hover */
+        0 0 0 2px rgba(0, 255, 192, 0.2);
+    /* More prominent glow on hover */
+}
+
+
+.formGroup {
+    margin-bottom: 25px;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    color: #b0b0b0;
+    font-weight: 500;
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="email"],
+.formGroup textarea {
+    width: 100%;
+    padding: 14px 18px;
+    background-color: #3b3b3b;
+    /* Darker input fields */
+    border: 1px solid #4a4a4a;
+    /* Subtle border */
+    border-radius: 8px;
+    color: #f0f0f0;
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+    color: #7a7a7a;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+    border-color: #00FFC0;
+    /* Green accent color from UI */
+    box-shadow: 0 0 0 3px rgba(0, 255, 192, 0.2);
+    /* Soft glow on focus */
+    outline: none;
+}
+
+.formGroup textarea {
+    resize: vertical;
+    /* Allow vertical resizing */
+    min-height: 120px;
+}
+
+.submitButton {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(90deg, #00FFC0 0%, #00C0FF 100%);
+    /* Green-blue gradient */
+    border: none;
+    border-radius: 8px;
+    color: #1a1a1a;
+    /* Dark text on bright button */
+    font-size: 1.15em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.submitButton:hover {
+    transform: translateY(-3px);
+    /* Subtle lift effect */
+    box-shadow: 0 10px 25px rgba(0, 255, 192, 0.3);
+    /* Enhanced shadow */
+    background: linear-gradient(90deg, #00C0FF 0%, #00FFC0 100%);
+    /* Reverse gradient on hover */
+}
+
+.submitButton:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.submitButton:disabled {
+    background: #4a4a4a;
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: none;
+    box-shadow: none;
+}
+
+.submissionSuccess {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #00FFC020;
+    /* Light green background */
+    color: #00FFC0;
+    /* Green text */
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.submissionError {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #ff000020;
+    /* Light red background */
+    color: #ff0000;
+    /* Red text */
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Social Links */
+.socialLinks {
+    text-align: center;
+    width: 100%;
+}
+
+.socialLinks p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    color: #b0b0b0;
+}
+
+.socialLinks a {
+    color: #e0e0e0;
+    /* neutral gray by default */
+    font-size: 1.8em;
+    margin: 0 15px;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+}
+
+.socialLinks a:hover {
+    transform: translateY(-5px);
+}
+
+/* Specific hover colors */
+.socialLinks a.twitter:hover {
+    color: #1DA1F2;
+}
+
+.socialLinks a.instagram:hover {
+    color: #E1306C;
+}
+
+.socialLinks a.spotify:hover {
+    color: #1DB954;
+}
+
+.socialLinks a.discord:hover {
+    color: #5865F2;
+}
+
+.socialLinks a.snapchat:hover {
+    color: #FFFC00;
+}
+
+.socialLinks a.steam:hover {
+    color: #1e4297;
+}
+
+.socialLinks a.github:hover {
+    color: #272626;
+}
+
+
+/* Illustration */
+.contactIllustration {
+    position: absolute;
+    /* Position relative to .contactSection */
+    bottom: -20px;
+    /* Adjust position */
+    right: -20px;
+    /* Adjust position */
+    width: 200px;
+    /* Adjust size */
+    height: 200px;
+    /* Adjust size */
+    opacity: 0.15;
+    /* Subtle */
+    pointer-events: none;
+    /* Make sure it doesn't interfere with clicks */
+    z-index: 0;
+    /* Behind form elements */
+    overflow: hidden;
+    /* Hide parts that go out of bounds */
+}
+
+.abstractLineArt {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150%;
+    /* Make it slightly larger than its container */
+    height: 150%;
+    stroke-dasharray: 200;
+    /* For drawing animation */
+    stroke-dashoffset: 200;
+    /* For drawing animation */
+    animation: drawLine 3s ease-out forwards;
+}
+
+
+.socials {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 8px;
+}
+
+
+@keyframes drawLine {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sectionTitle {
+        font-size: 2.5em;
+    }
+
+    .sectionSubtitle {
+        font-size: 1em;
+    }
+
+    .contactForm {
+        padding: 25px;
+    }
+
+    .submitButton {
+        font-size: 1em;
+        padding: 14px;
+    }
+
+    .socialLinks a {
+        font-size: 1.5em;
+        margin: 0 10px;
+    }
+
+    .contactIllustration {
+        width: 150px;
+        height: 150px;
+        bottom: -10px;
+        right: -10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contactSection {
+        padding: 60px 0;
+    }
+
+    .sectionTitle {
+        font-size: 2em;
+    }
+
+    .sectionSubtitle {
+        font-size: 0.9em;
+    }
+
+    .contactForm {
+        padding: 20px;
+    }
+
+    .contactIllustration {
+        width: 100px;
+        height: 100px;
+        bottom: 0px;
+        right: 0px;
+    }
+}

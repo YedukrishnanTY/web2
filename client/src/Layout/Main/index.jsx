@@ -28,7 +28,7 @@ export default function Main({ children }) {
             <div style={{ flex: 1, overflow: 'auto', display: 'flex', gap: 16, padding: '16px' }}>
                 {children}
             </div>
-            <motion.div className="progress" style={{ scaleX }} />
+            <motion.div className="progress" style={{ scaleX, zIndex: 1000 }} />
             <StyleSheet />
             {/* <ShootingStars />
             <StarsBackground /> */}

@@ -2,7 +2,7 @@ import React from 'react'
 
 function Spotify({ src }) {
     return (
-        <div style={{ width: '100%', maxWidth: '600px', }}>
+        <div style={{ width: '100%', maxWidth: '600px', zIndex: 100 }}>
             <iframe
                 data-testid="embed-iframe"
                 style={{ borderRadius: '12px' }}
