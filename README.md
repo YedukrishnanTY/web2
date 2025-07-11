@@ -15,9 +15,7 @@ This website serves as my online presence, providing information about my skills
 - HTML5
 - CSS3
 - JavaScript (React)
--  Backend technologies (e.g., Node.js, Django, Flask)
+-  Backend technologies (e.g., Node.js, Mongo)
 
 ---
-
-## 📂 Project Structure
 
