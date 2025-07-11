@@ -28,7 +28,7 @@ const ContactForm = () => {
         setSubmissionStatus(null);
 
         try {
-            await coffee();
+            await coffee(formData);
             setSubmissionStatus('success');
             setFormData(initialFormData);
         } catch (error) {

@@ -1,8 +1,8 @@
 import getHeaders from "../common/getHeaders";
-
+const API_BASE_URL = process.env.REACT_APP_API_URL;
 export const fetchDetails = async () => {
     try {
-        const response = await fetch(`http://localhost:3000/details`, {
+        const response = await fetch(`${API_BASE_URL}/details`, {
             method: 'GET',
             headers: getHeaders(),
         });
@@ -19,11 +19,12 @@ export const fetchDetails = async () => {
     }
 }
 
-export const coffee = async () => {
+export const coffee = async (payload) => {
     try {
-        const response = await fetch(`http://localhost:3000/coffee`, {
-            method: 'GET',
+        const response = await fetch(`${API_BASE_URL}/coffee`, {
+            method: 'POST',
             headers: getHeaders(),
+            body: JSON.stringify(payload),
         });
 
         if (!response.ok) {

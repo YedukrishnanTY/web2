@@ -5,6 +5,7 @@ const helmet= require("helmet");
 const morgan= require("morgan");
 const express= require("express");
 const details= require("./routes/details.js");
+const coffee= require("./routes/coffee.js");
 require('dotenv').config();
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(cors());
 
 
 app.use("/details", details);
+app.use("/coffee", coffee);
 
 const port = process.env.PORT || 3001;
 
