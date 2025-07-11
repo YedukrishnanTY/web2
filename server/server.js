@@ -1,12 +1,12 @@
-const serverlessExpress = require('@vendia/serverless-express');
+
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 require('dotenv').config();
 
-const details = require('../routes/details.js');
-const coffee = require('../routes/coffee.js');
+const details = require('./routes/details.js');
+const coffee = require('./routes/coffee.js');
 
 const app = express();
 
@@ -23,14 +23,8 @@ app.use(cors({
 app.use("/details", details);
 app.use("/coffee", coffee);
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 8080;
 
-// ✅ If run locally, start a server:
-if (process.env.NODE_ENV !=='production') {
-  app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}/`);
-  });
-}
-
-// ✅ Always export for serverless:
-exports.handler = serverlessExpress({ app });
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}/`);
+});
