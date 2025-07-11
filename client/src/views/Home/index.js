@@ -1,12 +1,15 @@
+import React from 'react';
 import { animate, stagger } from "motion"
 import { splitText } from "motion-plus"
-import { useEffect, useRef } from "react"
-import { AnimatedTestimonials } from "./Components/AnimatedTestimonials"
+import { AnimatedTestimonials } from "./Components/AnimatedTestimonials";
+import { fetchDetails } from '../../services/data.services'
+import Spotify from './Components/Spotify.js';
 
 export default function SplitText() {
-    const containerRef = useRef(null)
+    const containerRef = React.useRef(null);
+    const [testimonials, setTestimonials] = React.useState([]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         document.fonts.ready.then(() => {
             if (!containerRef.current) return
             containerRef.current.style.visibility = "visible"
@@ -34,7 +37,9 @@ export default function SplitText() {
             alignItems: "center",
             width: "100%",
             textAlign: "center",
-            flexDirection: 'column'
+            flexDirection: 'column',
+            gap:'32px',
+            paddingBottom: '80px',
         },
         heading: {
             willChange: "transform, opacity",
@@ -42,43 +47,28 @@ export default function SplitText() {
         },
     }
 
-    const testimonials = [
-        {
-            quote:
-                "The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
-            name: "Sarah Chen",
-            designation: "Product Manager at TechFlow",
-            src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        },
-        {
-            quote:
-                "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
-            name: "Michael Rodriguez",
-            designation: "CTO at InnovateSphere",
-            src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        },
-        {
-            quote:
-                "This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
-            name: "Emily Watson",
-            designation: "Operations Director at CloudScale",
-            src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        },
-        {
-            quote:
-                "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
-            name: "James Kim",
-            designation: "Engineering Lead at DataPro",
-            src: "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        },
-        {
-            quote:
-                "The scalability and performance have been game-changing for our organization. Highly recommend to any growing business.",
-            name: "Lisa Thompson",
-            designation: "VP of Technology at FutureNet",
-            src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        },
-    ]; //TODO: should be from API
+    React.useEffect(() => {
+        fetchDetails()
+            .then((data) => {
+                const images = [
+                    '/assets/img.JPEG',
+                    '/assets/img1.JPEG',
+                    '/assets/img2.JPEG'
+                ];
+                const dataWithImages = (data || []).map((item, index) => {
+                    const imageIndex = index % images.length;
+                    return {
+                        ...item,
+                        src: images[imageIndex]
+                    };
+                });
+
+                setTestimonials(dataWithImages);
+            })
+            .catch((error) => {
+                console.error("Error fetching details:", error);
+            });
+    }, []);
 
     return (
         <div ref={containerRef} style={styles.container}>
@@ -86,6 +76,7 @@ export default function SplitText() {
                 Hi I'm YeduKrishnanTY
             </h1>
             <AnimatedTestimonials testimonials={testimonials} />
+            <Spotify src={"https://open.spotify.com/embed/playlist/5ldCF4ft5tuJfxO29MVelD?utm_source=generator&theme=0"} />
         </div>
     )
 }
