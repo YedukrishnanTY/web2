@@ -4,14 +4,18 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 require('dotenv').config();
+const cookieParser = require('cookie-parser');
 
 const { MongoClient, ServerApiVersion } = require("mongodb");
 
 const details = require('./routes/details.js');
 const coffee = require('./routes/coffee.js');
+const Auth = require('./routes/Auth.js');
+const Profile = require('./routes/Profile.js');
 
 const app = express();
 
+app.use(cookieParser());
 app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
@@ -39,6 +43,8 @@ async function startServer() {
     // ✅ Use routes
     app.use("/details", details);
     app.use("/coffee", coffee);
+    app.use("/login", Auth);
+    app.use("/profile", Profile);
 
     const port = process.env.PORT || 8080;
     app.listen(port, () => {

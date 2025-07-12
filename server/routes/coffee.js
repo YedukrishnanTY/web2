@@ -1,6 +1,7 @@
 // routes/coffee.js
 const express = require('express');
 const router = express.Router();
+const verifyToken = require('../middleware/auth');
 
 router.post("/", async (req, res) => {
     try {
@@ -33,7 +34,8 @@ router.post("/", async (req, res) => {
         res.status(500).json({ error: "Failed to insert coffee document." });
     }
 });
-router.get("/all", async (req, res) => {
+
+router.get("/all", verifyToken, async (req, res) => {
     try {
         const client = req.app.locals.client.db("personal-details");
         const collection = client.collection("coffee");

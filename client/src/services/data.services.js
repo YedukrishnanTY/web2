@@ -44,6 +44,7 @@ export const getCoffeeList = async () => {
     try {
         const response = await fetch(`${API_BASE_URL}/coffee/all`, {
             method: 'GET',
+            credentials: 'include',
             headers: getHeaders(),
         });
         if (!response.ok) {
