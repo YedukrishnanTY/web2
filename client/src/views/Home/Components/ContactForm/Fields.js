@@ -18,14 +18,14 @@ export const formFields = [
         name: 'subject',
         type: 'text',
         placeholder: 'lets have a coffee',
-        required: true, // Added required for subject as per previous design
+        required: true, 
     },
     {
         label: 'Message',
         name: 'message',
-        type: 'textarea', // Custom type for textarea
+        type: 'textarea',
         placeholder: 'Tell me everything...',
-        rows: 6, // Added rows for textarea
-        required: false, // Message is optional
+        rows: 6,
+        required: true,
     },
 ];

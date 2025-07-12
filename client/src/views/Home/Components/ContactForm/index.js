@@ -46,11 +46,11 @@ const ContactForm = () => {
 
     return (
         <section id="contact" className={styles.contactSection}>
+            <h2 className={styles.sectionTitle}>Let's Connect.</h2>
+            <p className={styles.sectionSubtitle}>
+                Have a question/suggestion, or just want to say hi?
+            </p>
             <div className={styles.container}>
-                <h2 className={styles.sectionTitle}>Let's Connect.</h2>
-                <p className={styles.sectionSubtitle}>
-                    Have a question/suggestion, or just want to say hi?
-                </p>
 
                 <form className={styles.contactForm} onSubmit={handleSubmit}>
                     {formFields.map((field) => (
@@ -101,7 +101,7 @@ const ContactForm = () => {
                     )}
                 </form>
 
-               <Socials />
+                <Socials />
 
                 <div className={styles.contactIllustration}>
                     <svg

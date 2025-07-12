@@ -57,7 +57,7 @@ export default function Socials() {
             <p>Find me elsewhere:</p>
             <div className={styles.socials}>
                 {socials.map((social) => (
-                    <div key={social.href} className={styles.iconWrapper}>
+                    <div key={social.href} style={{zIndex: 2}}>
                         <a
                             href={social.href}
                             target="_blank"

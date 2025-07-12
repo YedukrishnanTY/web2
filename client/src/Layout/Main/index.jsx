@@ -25,7 +25,7 @@ export default function Main({ children }) {
                 speed={0.5}
 
             />
-            <div style={{ flex: 1, overflow: 'auto', display: 'flex', gap: 16, padding: '16px' }}>
+            <div style={{ flex: 1, overflow: 'auto', display: 'flex', gap: 16, }}>
                 {children}
             </div>
             <motion.div className="progress" style={{ scaleX, zIndex: 1000 }} />
