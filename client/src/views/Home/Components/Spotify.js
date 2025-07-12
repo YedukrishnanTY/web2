@@ -1,10 +1,10 @@
 import React from 'react'
 
-function Spotify({ src, id = "spotify-embed" }) {
+function Spotify({ src, title = "spotify-embed" }) {
     return (
         <div style={{ width: '100%', maxWidth: '600px', zIndex: 100 }}>
             <iframe
-                id={id}
+                title={title}
                 data-testid="embed-iframe"
                 style={{ borderRadius: '12px' }}
                 src={src}

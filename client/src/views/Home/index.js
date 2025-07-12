@@ -1,6 +1,6 @@
 import React from 'react';
 import { AnimatedTestimonials } from "./Components/AnimatedTestimonials";
-import { fetchDetails, getCoffeeList } from '../../services/data.services'
+import { fetchDetails } from '../../services/data.services'
 import Spotify from './Components/Spotify.js';
 import { styles } from './style.js';
 import ContactForm from './Components/ContactForm/index.js';
