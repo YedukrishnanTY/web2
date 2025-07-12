@@ -1,31 +1,28 @@
-// routes/details.js
+// routes/coffee.js
 const express = require('express');
 const router = express.Router();
-const { MongoClient, ServerApiVersion } = require("mongodb");
-
-require('dotenv').config();
-
-const uri = process.env.MONGO_URL;
-const client = new MongoClient(uri, {
-    serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-    }
-});
 
 router.post("/", async (req, res) => {
     try {
-        const newCoffee = req.body; // This is the data sent by the client
+        const newCoffee = req.body;
 
         if (!newCoffee || Object.keys(newCoffee).length === 0) {
             return res.status(400).json({ error: "Payload is missing or empty." });
         }
 
-        await client.connect();
-        const collection = client.db("personal-details").collection("coffee");
+        const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+        const userAgent = req.headers['user-agent'];
 
-        const result = await collection.insertOne(newCoffee);
+        const coffeeDoc = {
+            ...newCoffee,
+            ip,
+            userAgent,
+        };
+
+        const client = req.app.locals.client.db("personal-details");
+        const collection = client.collection("coffee");
+
+        const result = await collection.insertOne(coffeeDoc);
 
         res.status(201).json({
             message: "Coffee document added successfully.",
@@ -34,8 +31,17 @@ router.post("/", async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Failed to insert coffee document." });
-    } finally {
-        await client.close();
+    }
+});
+router.get("/all", async (req, res) => {
+    try {
+        const client = req.app.locals.client.db("personal-details");
+        const collection = client.collection("coffee");
+        const data = await collection.find({}).toArray();
+        res.status(200).json(data);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to fetch details." });
     }
 });
 

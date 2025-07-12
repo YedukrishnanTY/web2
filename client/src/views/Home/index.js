@@ -1,6 +1,6 @@
 import React from 'react';
 import { AnimatedTestimonials } from "./Components/AnimatedTestimonials";
-import { fetchDetails } from '../../services/data.services'
+import { fetchDetails, getCoffeeList } from '../../services/data.services'
 import Spotify from './Components/Spotify.js';
 import { styles } from './style.js';
 import ContactForm from './Components/ContactForm/index.js';
@@ -10,7 +10,6 @@ import ProfileCard from '../../Exp/ProfileCard'
 
 export default function SplitText() {
     const [testimonials, setTestimonials] = React.useState([]);
-
 
     React.useEffect(() => {
         fetchDetails()
@@ -38,8 +37,8 @@ export default function SplitText() {
     return (
         <div style={styles.wrapper} >
             <img src={require('../../assets/5.JPEG')} alt="Right 1" style={styles.right1} />
-            <img src={require('../../assets/3.JPEG')} alt="Left 2" style={styles.left3} />
-            <img src={require('../../assets/4.JPEG')} alt="Left 2" style={styles.right3} />
+            <img src={require('../../assets/3.JPEG')} alt="Left 2" style={styles.left1} />
+            <img src={require('../../assets/4.JPEG')} alt="Left 2" style={styles.right2} />
             <ProfileCard
                 name="YeduKrishnanTY"
                 title="Front End Developer"

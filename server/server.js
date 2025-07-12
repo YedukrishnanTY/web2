@@ -1,9 +1,11 @@
-
+// server.js
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 require('dotenv').config();
+
+const { MongoClient, ServerApiVersion } = require("mongodb");
 
 const details = require('./routes/details.js');
 const coffee = require('./routes/coffee.js');
@@ -16,15 +18,36 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 
 app.use(cors({
-  origin: [process.env.CLIENT_URL, 'http://localhost:3000', 'https://yedu.is-a.dev'],
+  origin: [process.env.CLIENT_URL, 'http://localhost:3000', 'https://yedu.is-a.dev',],
   credentials: true,
 }));
 
-app.use("/details", details);
-app.use("/coffee", coffee);
-
-const port = process.env.PORT || 8080;
-
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}/`);
+const client = new MongoClient(process.env.MONGO_URL, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
 });
+
+async function startServer() {
+  try {
+    await client.connect();
+    console.log("✅ Connected to MongoDB");
+    app.locals.client = client;
+
+    // ✅ Use routes
+    app.use("/details", details);
+    app.use("/coffee", coffee);
+
+    const port = process.env.PORT || 8080;
+    app.listen(port, () => {
+      console.log(`Server running at http://localhost:${port}/`);
+    });
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
+}
+
+startServer();

@@ -17,23 +17,11 @@ export const styles = {
     },
     left1: {
         position: "absolute",
-        top: "100px",
-        left: "50px",
-        width: "200px", zIndex: 1,
-    },
-    left2: {
-        position: "absolute",
-        top: "500px",
-        left: "300px",
-        width: "80px",
-        zIndex: 1,
-    },
-    left3: {
-        position: "absolute",
         bottom: "250px",
         left: "-50px",
         width: "150px",
         zIndex: 1,
+        pointerEvents: 'none'
     },
     right1: {
         position: "absolute",
@@ -41,19 +29,14 @@ export const styles = {
         right: "50px",
         width: "120px",
         zIndex: 1,
+        pointerEvents: 'none'
     },
     right2: {
-        position: "absolute",
-        top: "600px",
-        right: "300px",
-        width: "100px",
-        zIndex: 1,
-    },
-    right3: {
         position: "absolute",
         top: "00px",
         right: "-150px",
         width: "400px",
         zIndex: 1,
+        pointerEvents: 'none'
     },
 };
