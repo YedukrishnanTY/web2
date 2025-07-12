@@ -7,9 +7,7 @@ import Spotify from './Components/Spotify.js';
 import { styles } from './style.js';
 import ContactForm from './Components/ContactForm/index.js';
 import Hyperspeed from '../../Exp/Hyperspeed';
-
-// the component will fill the height/width of its parent container, edit the CSS to change this
-// the options below are the default values
+import ProfileCard from '../../Exp/ProfileCard'
 
 
 
@@ -66,9 +64,18 @@ export default function SplitText() {
             <img src={require('../../assets/5.JPEG')} alt="Right 1" style={styles.right1} />
             <img src={require('../../assets/3.JPEG')} alt="Left 2" style={styles.left3} />
             <img src={require('../../assets/4.JPEG')} alt="Left 2" style={styles.right3} />
+            <ProfileCard
+                name="YeduKrishnanTY"
+                title="Front End Developer"
+                handle="yedu.k"
+                status="brb!"
+                contactText="Contact Me"
+                avatarUrl={require('../../assets/ty.gif')}
+                showUserInfo={true}
+                enableTilt={false}
+                // onContactClick={() => console.log('Contact clicked')}
+            />
 
-            {/* Main content */}
-            <h1 style={styles.heading}>Hi I'm YeduKrishnanTY</h1>
             <AnimatedTestimonials testimonials={testimonials || []} />
             <Spotify src="https://open.spotify.com/embed/playlist/5ldCF4ft5tuJfxO29MVelD?utm_source=generator&theme=0" />
             <Hyperspeed
