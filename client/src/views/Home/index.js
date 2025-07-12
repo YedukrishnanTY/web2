@@ -1,6 +1,4 @@
 import React from 'react';
-import { animate, stagger } from "motion"
-import { splitText } from "motion-plus"
 import { AnimatedTestimonials } from "./Components/AnimatedTestimonials";
 import { fetchDetails } from '../../services/data.services'
 import Spotify from './Components/Spotify.js';
