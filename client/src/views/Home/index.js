@@ -11,29 +11,8 @@ import ProfileCard from '../../Exp/ProfileCard'
 
 
 export default function SplitText() {
-    const containerRef = React.useRef(null);
     const [testimonials, setTestimonials] = React.useState([]);
 
-    React.useEffect(() => {
-        document.fonts.ready.then(() => {
-            if (!containerRef.current) return
-            containerRef.current.style.visibility = "visible"
-            const { words } = splitText(
-                containerRef.current.querySelector("h1")
-            )
-
-            animate(
-                words,
-                { opacity: [0, 1], y: [10, 0] },
-                {
-                    type: "spring",
-                    duration: 2,
-                    bounce: 0,
-                    delay: stagger(0.05),
-                }
-            )
-        })
-    }, [])
 
     React.useEffect(() => {
         fetchDetails()
@@ -59,7 +38,7 @@ export default function SplitText() {
     }, []);
 
     return (
-        <div style={styles.wrapper} ref={containerRef}>
+        <div style={styles.wrapper} >
             <img src={require('../../assets/5.JPEG')} alt="Right 1" style={styles.right1} />
             <img src={require('../../assets/3.JPEG')} alt="Left 2" style={styles.left3} />
             <img src={require('../../assets/4.JPEG')} alt="Left 2" style={styles.right3} />
@@ -72,7 +51,7 @@ export default function SplitText() {
                 avatarUrl={require('../../assets/ty.gif')}
                 showUserInfo={true}
                 enableTilt={false}
-                // onContactClick={() => console.log('Contact clicked')}
+            // onContactClick={() => console.log('Contact clicked')}
             />
 
             <AnimatedTestimonials testimonials={testimonials || []} />
