@@ -37,11 +37,11 @@ router.post("/", async (req, res) => {
     // Set JWT as HTTP-only cookie
     res.cookie('a', token, {
       httpOnly: true,
-      secure: true, // ⚠️ Set to true in production behind HTTPS
+      secure: true,
       sameSite: 'None',
-      domain: 'yedu.is-a.dev', 
-      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+      maxAge: 7 * 24 * 60 * 60 * 1000
     });
+
 
     res.status(200).json({ message: "Login successful." });
 
