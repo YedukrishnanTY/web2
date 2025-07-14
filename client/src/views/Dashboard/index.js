@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { getProfile } from '../../services/Profile.services';
-import { getCoffeeList } from '../../services/data.services';
+import { deleteCoffee, getCoffeeList } from '../../services/data.services';
 import { useNavigate } from 'react-router-dom';
 
-
-
 function Dashboard() {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     const [coffeeData, setCoffeeData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -15,10 +13,18 @@ function Dashboard() {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(10); // Number of items to display per page
 
-
     // State for Coffee Details Modal
     const [showDetailsModal, setShowDetailsModal] = useState(false);
     const [currentCoffeeDetails, setCurrentCoffeeDetails] = useState(null);
+
+    // New states for Delete Confirmation Modal
+    const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false);
+    const [coffeeToDelete, setCoffeeToDelete] = useState(null);
+
+    // New states for Snackbar
+    const [showSnackbar, setShowSnackbar] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [snackbarType, setSnackbarType] = useState('success'); // 'success' or 'error'
 
     const fetchDashboardData = async () => {
         try {
@@ -27,17 +33,14 @@ function Dashboard() {
 
             // Fetch profile data (if needed for authentication or user-specific data)
             const profileData = await getProfile();
-            console.log('Profile data:', profileData);
 
             // Fetch coffee list data
             const result = await getCoffeeList();
-            console.log('Coffee list:', result);
             setCoffeeData(result);
-
         } catch (err) {
             console.error('Error fetching dashboard data:', err);
             setError('Failed to load dashboard data. Please try again later.');
-            navigate('/'); 
+            navigate('/');
         } finally {
             setLoading(false);
         }
@@ -45,7 +48,7 @@ function Dashboard() {
 
     useEffect(() => {
         fetchDashboardData();
-    }, []); 
+    }, []);
 
     // Calculate total pages
     const totalPages = Math.ceil(coffeeData.length / itemsPerPage);
@@ -71,9 +74,53 @@ function Dashboard() {
         }
     };
 
+    // Function to show delete confirmation modal
+    const handleDeleteClick = (coffee) => {
+        setCoffeeToDelete(coffee);
+        setShowDeleteConfirmModal(true);
+    };
 
+    // Function to show the snackbar
+    const showCustomSnackbar = (message, type) => {
+        setSnackbarMessage(message);
+        setSnackbarType(type);
+        setShowSnackbar(true);
+        setTimeout(() => {
+            setShowSnackbar(false);
+            setSnackbarMessage('');
+            setSnackbarType('success');
+        }, 3000); // Snackbar will disappear after 3 seconds
+    };
 
-    // Function to handle showing coffee details
+    // Function to confirm and perform deletion
+    const confirmDelete = () => {
+        if (coffeeToDelete) {
+            const payload = {
+                _id: coffeeToDelete._id
+            };
+            deleteCoffee(payload)
+                .then(() => {
+                    setCoffeeData(coffeeData.filter(item => item._id !== coffeeToDelete._id));
+                    setShowDeleteConfirmModal(false);
+                    setCoffeeToDelete(null);
+                    showCustomSnackbar('Coffee entry deleted successfully!', 'success');
+                })
+                .catch((error) => {
+                    console.error("Error deleting coffee:", error);
+                    setError("Failed to delete coffee document.");
+                    setShowDeleteConfirmModal(false);
+                    setCoffeeToDelete(null);
+                    showCustomSnackbar('Failed to delete coffee entry.', 'error');
+                });
+        }
+    };
+
+    // Function to cancel deletion
+    const cancelDelete = () => {
+        setShowDeleteConfirmModal(false);
+        setCoffeeToDelete(null);
+    };
+
     const handleShowDetails = (coffee) => {
         setCurrentCoffeeDetails(coffee);
         setShowDetailsModal(true);
@@ -127,7 +174,8 @@ function Dashboard() {
                                     <div className="col-span-1 truncate">{coffee.message}</div>
                                     <div className="col-span-1 truncate">{coffee.ip}</div>
                                     <div className="col-span-1 truncate">{coffee.userAgent}</div>
-                                    <div className="col-span-1 flex justify-center">
+                                    <div className="col-span-1 flex justify-center space-x-2">
+                                        {/* View Details Button */}
                                         <button
                                             onClick={() => handleShowDetails(coffee)}
                                             className="inline-flex items-center justify-center p-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out"
@@ -137,6 +185,21 @@ function Dashboard() {
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-eye">
                                                 <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
                                                 <circle cx="12" cy="12" r="3" />
+                                            </svg>
+                                        </button>
+
+                                        {/* Delete Button */}
+                                        <button
+                                            onClick={() => handleDeleteClick(coffee)}
+                                            className="inline-flex items-center justify-center p-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-150 ease-in-out"
+                                            aria-label="Delete Coffee"
+                                        >
+                                            {/* Trash icon SVG */}
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-trash">
+                                                <polyline points="3 6 5 6 21 6" />
+                                                <path d="M19 6 17.5 20.5a2 2 0 0 1-2 1.5H8.5a2 2 0 0 1-2-1.5L5 6m5 0V4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2" />
+                                                <line x1="10" y1="11" x2="10" y2="17" />
+                                                <line x1="14" y1="11" x2="14" y2="17" />
                                             </svg>
                                         </button>
                                     </div>
@@ -161,7 +224,7 @@ function Dashboard() {
                                         key={i + 1}
                                         onClick={() => paginate(i + 1)}
                                         className={`px-4 py-2 text-sm font-medium rounded-lg transition duration-150 ease-in-out
-                      ${currentPage === i + 1
+                                            ${currentPage === i + 1
                                                 ? 'bg-blue-600 text-white shadow-md'
                                                 : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
                                             }`}
@@ -223,6 +286,41 @@ function Dashboard() {
                 </div>
             )}
 
+            {/* Delete Confirmation Modal */}
+            {showDeleteConfirmModal && (
+                <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center p-4 z-50">
+                    <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl w-full max-w-sm transform transition-all duration-300 scale-100">
+                        <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-6 text-center">Confirm Deletion</h3>
+                        <p className="text-gray-700 dark:text-gray-300 text-center mb-8">
+                            Are you sure you want to delete this coffee entry? This action cannot be undone.
+                        </p>
+                        <div className="flex justify-center space-x-4">
+                            <button
+                                onClick={confirmDelete}
+                                className="px-6 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-150 ease-in-out"
+                            >
+                                Yes, Delete
+                            </button>
+                            <button
+                                onClick={cancelDelete}
+                                className="px-6 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-600 transition duration-150 ease-in-out"
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {showSnackbar && (
+                <div
+                    className={`fixed top-8 right-8 p-4 rounded-md shadow-lg text-white text-center transition-all duration-300 ${snackbarType === 'success' ? 'bg-green-500' : 'bg-red-500'
+                        }`}
+                    style={{ zIndex: 1000 }} // Ensure it's above other elements
+                >
+                    {snackbarMessage}
+                </div>
+            )}
         </div>
     );
 }

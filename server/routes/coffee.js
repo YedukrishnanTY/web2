@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const verifyToken = require('../middleware/auth');
+const { ObjectId } = require("mongodb");
 
 router.post("/", async (req, res) => {
     try {
@@ -46,5 +47,26 @@ router.get("/all", verifyToken, async (req, res) => {
         res.status(500).json({ error: "Failed to fetch details." });
     }
 });
+
+
+router.delete("/", verifyToken, async (req, res) => {
+    try {
+        const { _id } = req.body;
+        const client = req.app.locals.client.db("personal-details");
+        const collection = client.collection("coffee");
+
+        const result = await collection.deleteOne({ _id: new ObjectId(_id) });
+
+        if (result.deletedCount === 0) {
+            return res.status(404).json({ message: "Document not found." });
+        }
+
+        res.status(200).json({ message: "Document deleted successfully." });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to delete document." });
+    }
+});
+
 
 module.exports = router;

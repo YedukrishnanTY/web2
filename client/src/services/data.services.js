@@ -57,3 +57,22 @@ export const getCoffeeList = async () => {
         throw error;
     }
 }
+
+export const deleteCoffee = async (payload) => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/coffee`, {
+            method: 'DELETE',
+            credentials: 'include',
+            headers: getHeaders(),
+            body: JSON.stringify(payload),
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Failed to fetch details:', error);
+        throw error;
+    }
+}
